@@ -29,8 +29,9 @@ step2:
     mov  eax, cr0
     or   eax, 1
     mov  cr0, eax
-    jmp CODE_SEG:load32_protected
-
+    ;jmp CODE_SEG:load32_protected
+    jmp $
+    
 ;GDT
 gdt_start:
 gdt_null:
@@ -63,15 +64,10 @@ gdt_descriptor:
 
 [BITS 32]
 load32_protected:
-    mov ax, DATA_SEG
-    mov ds, ax
-    mov es, ax
-    mov gs, ax
-    mov fs, ax
-    mov ss, ax
-    mov ebp, 0x00200000
-    mov esp, ebp
-    jmp $
+    mov eax, 1 
+    mov ecx, 100 
+    mov edi, 0x100000
+    call ata_lba_read
 
 times 510-($-$$) db 0
     dw 0xAA55
