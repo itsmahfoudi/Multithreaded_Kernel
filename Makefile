@@ -19,4 +19,4 @@ clean:
 	rm -rf ./bin/
 	rm -rf ./build/
 qemu:
-	qemu-system-x86_64 -hda ./bin/boot.bin
+	qemu-system-x86_64 -hda ./bin/os.bin
