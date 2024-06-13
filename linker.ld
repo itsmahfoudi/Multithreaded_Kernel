@@ -2,17 +2,17 @@ ENTRY(_start)
 OUTPUT_FORMAT(binary)
 SECTIONS {
   . = 1M;
-  .text: ALIGN(4096)
+  .text : ALIGN(4096) 
   {
     *(.text)
   }
 
-  .rodata: ALIGN(4096)
+  .rodata : ALIGN(4096) 
   {
     *(.rodata)
   }
 
-  .data: ALIGN(4096)
+  .data : ALIGN(4096)
   {
     *(.data)
   }
