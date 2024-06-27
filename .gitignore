@@ -1,7 +1,7 @@
 # Prerequisites
 *.d
-./bin/
-./build/
+./bin/*
+./build/*
 
 # Object files
 *.o

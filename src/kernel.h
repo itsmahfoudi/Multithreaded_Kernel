@@ -6,5 +6,6 @@
 
 void terminal_initialize(void);
 void kernel_main(void);
+void print(const char * str); 
 
 #endif // !KERNEL_H
