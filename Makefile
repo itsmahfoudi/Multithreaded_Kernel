@@ -1,4 +1,4 @@
-FILES = build/kernel.asm.o build/kernel.o ./build/memory/memory.o ./build/idt/idt.o ./build/idt/idt.asm.o
+FILES = build/kernel.asm.o build/kernel.o ./build/memory/memory.o ./build/idt/idt.o ./build/idt/idt.asm.o ./build/io/io.asm.o
 INCLUDES = -Isrc
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops  \
 				-fstrength-reduce -fomit-frame-pointer -finline-functions -Wno-unused-function \
@@ -31,6 +31,9 @@ build/idt/idt.o : src/idt/idt.c
 
 build/idt/idt.asm.o : src/idt/idt.asm
 	nasm -f elf -g src/idt/idt.asm -o build/idt/idt.asm.o
+
+build/io/io.asm.o : src/io/io.asm
+	nasm -f elf -g src/io/io.asm -o build/io/io.asm.o
 clean:
 	rm -rf bin/
 	rm -rf build/
