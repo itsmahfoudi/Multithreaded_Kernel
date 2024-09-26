@@ -70,20 +70,9 @@ void kernel_main(void) {
   // Initialize the heap
   kheap_init();
 
+  //Initializing the interrupt descriptor table
   idt_init();
-  //problem();
 
-  //outb(0x10, 0xFF);
-  void* ptr1 = kmalloc(100);
-  void* ptr2 = kmalloc(1000);
-  void* ptr3 = kmalloc(1000);
-  kfree(ptr1);
-  void* ptr = kmalloc(100);
-  if (ptr1 || ptr2 || ptr3 || ptr) {
-      print("Memory\n");
-  }
-
-  kfree(ptr2);
-  kfree(ptr3);
-  kfree(ptr);
+  //Enable the system interrupts
+  enable_interrupts();
 }
