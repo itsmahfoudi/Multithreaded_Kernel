@@ -23,4 +23,9 @@ typedef struct {
 paging_4gb_chunk_t* paging_new_4gb(uint8_t flags);
 void paging_switch(uint32_t* directory);
 void enable_paging();
+
+uint32_t* paging_get_directory(paging_4gb_chunk_t* chunk);
+uint8_t paging_is_aligned(void* address);
+uint8_t paging_get_indexes(void* virtual_address, uint32_t* directory_index_out, uint32_t* table_index_out);
+uint8_t paging_set(uint32_t* directory, void* virtual_address, uint32_t value);
 #endif //MULTITHREADED_KERNEL_PAGING_H

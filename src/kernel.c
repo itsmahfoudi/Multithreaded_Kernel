@@ -67,20 +67,30 @@ extern void problem(void);
 static paging_4gb_chunk_t* kernel_chunk = 0;
 
 void kernel_main(void) {
-  terminal_initialize();   
-  print("AYOUB\nELMAHFOUDI\n");
+    terminal_initialize();
+    print("AYOUB\nELMAHFOUDI\n");
 
-  // Initialize the heap
-  kheap_init();
+    // Initialize the heap
+    print("Initialize the kernel heap\n");
+    kheap_init();
 
-  //Initializing the interrupt descriptor table
-  idt_init();
 
-  //Enable paging
-  kernel_chunk = paging_new_4gb(PAGING_IS_PRESENT | PAGING_IS_WRITABLE | PAGING_ACCESS_FROM_ALL);
-  // switch to kernel paging chunk
-  paging_switch(kernel_chunk->directory_entry);
+    //Initializing the interrupt descriptor table
+    print("Initialize the IDT\n");
+    idt_init();
 
-  //Enable the system interrupts
-  enable_interrupts();
+    //Enable paging
+    print("Enable paging\n");
+    kernel_chunk = paging_new_4gb(PAGING_IS_PRESENT | PAGING_IS_WRITABLE | PAGING_ACCESS_FROM_ALL);
+    // switch to kernel paging chunk
+    paging_switch(kernel_chunk->directory_entry);
+
+    //enable paging
+    enable_paging();
+
+    //free the allocated memory
+    kfree(ptr);
+
+    //Enable the system interrupts
+    enable_interrupts();
 }
