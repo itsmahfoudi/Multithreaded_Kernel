@@ -5,6 +5,7 @@
 #include "io/io.h"
 #include "memory/heap/kheap.h"
 #include "memory/paging/paging.h"
+#include "disk/disk.h"
 
 uint16_t* video_mem = 0;
 uint16_t terminal_row = 0;
@@ -68,7 +69,7 @@ static paging_4gb_chunk_t* kernel_chunk = 0;
 
 void kernel_main(void) {
     terminal_initialize();
-    print("AYOUB\nELMAHFOUDI\n");
+    print("AYOUB EL MAHFOUDI\n");
 
     // Initialize the heap
     print("Initialize the kernel heap\n");
@@ -79,7 +80,7 @@ void kernel_main(void) {
     print("Initialize the IDT\n");
     idt_init();
 
-    //Enable paging
+    //creating page tables
     print("Enable paging\n");
     kernel_chunk = paging_new_4gb(PAGING_IS_PRESENT | PAGING_IS_WRITABLE | PAGING_ACCESS_FROM_ALL);
     // switch to kernel paging chunk
@@ -88,9 +89,9 @@ void kernel_main(void) {
     //enable paging
     enable_paging();
 
-    //free the allocated memory
-    kfree(ptr);
-
     //Enable the system interrupts
     enable_interrupts();
+
+    char buffer[512];
+    disk_read_sector(0, 1, buffer);
 }
