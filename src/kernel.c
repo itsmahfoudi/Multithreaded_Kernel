@@ -75,6 +75,9 @@ void kernel_main(void) {
     print("Initialize the kernel heap\n");
     kheap_init();
 
+    // Initialize the disk
+    print("Initialize the disk\n");
+    disk_search_and_init();
 
     //Initializing the interrupt descriptor table
     print("Initialize the IDT\n");
@@ -91,7 +94,4 @@ void kernel_main(void) {
 
     //Enable the system interrupts
     enable_interrupts();
-
-    char buffer[512];
-    disk_read_sector(0, 1, buffer);
 }
