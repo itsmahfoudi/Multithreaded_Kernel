@@ -4,7 +4,7 @@
 
 #define KERNEL_CODE_SELECTOR            0x08
 #define KERNEL_DATA_SELECTOR            0x10
-#define FASKAOS_TOTAL_INTERRUPTS         512
+#define FASKA_OS_TOTAL_INTERRUPTS         512
 
 // 100Mb is the size of the kernel heap
 #define FASKA_OS_HEAP_SIZE_BYTES        104857600
@@ -12,6 +12,6 @@
 #define FASKA_OS_HEAP_START_ADDRESS     0x01000000
 #define FASKA_OS_HEAP_TABLE_ADDRESS     0x00007E00
 
-#define FASKAOS_SECTOR_SIZE             512
+#define FASKA_OS_SECTOR_SIZE             512
 
 #endif //CONFIG_H

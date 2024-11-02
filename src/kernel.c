@@ -6,19 +6,14 @@
 #include "memory/heap/kheap.h"
 #include "memory/paging/paging.h"
 #include "disk/disk.h"
+#include "fs/pparser.h"
+#include "string/string.h"
+
 
 uint16_t* video_mem = 0;
 uint16_t terminal_row = 0;
 uint16_t terminal_col = 0;
 
-size_t strlen(const char* str) 
-{
-  size_t len = 0;
-  while (str[len]) {
-    len++;
-  }
-  return len;
-}
 
 uint16_t terminal_make_char(char c, char color) 
 {
@@ -94,4 +89,20 @@ void kernel_main(void) {
 
     //Enable the system interrupts
     enable_interrupts();
+
+    //test path parser
+    const char* path = "0:/bin/shell.elf";
+    path_root* root = pathparser_parse(path, "");
+    if (root == NULL) {
+        print("Failed to parse path\n");
+    } else {
+        print("Parsed path\n");
+        path_part* part = root->first;
+        while (part != NULL) {
+            print(part->part);
+            print("\n");
+            part = part->next;
+        }
+        pathparser_free(root);
+    }
 }

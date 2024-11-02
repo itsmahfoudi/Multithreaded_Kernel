@@ -5,4 +5,6 @@
 #define EIO                1
 #define EINVARG            2
 #define ENOMEM             3
+#define EINVPATH           4
+
 #endif //MULTITHREADED_KERNEL_STATUS_H

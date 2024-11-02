@@ -4,7 +4,7 @@
 #include "kernel.h"
 #include "io/io.h"
 
-struct idt_desc idt_descriptors[FASKAOS_TOTAL_INTERRUPTS];
+struct idt_desc idt_descriptors[FASKA_OS_TOTAL_INTERRUPTS];
 struct idtr_desc idtr_descriptor;
 
 extern void int21h(void);
@@ -34,11 +34,11 @@ void idt_set(int interrupt_num, void* address) {
 }
 
 void idt_init() {
-    memset(idt_descriptors, 0, sizeof(struct idt_desc)*FASKAOS_TOTAL_INTERRUPTS);
-    idtr_descriptor.limit = sizeof(struct idt_desc)*FASKAOS_TOTAL_INTERRUPTS - 1;
+    memset(idt_descriptors, 0, sizeof(struct idt_desc)*FASKA_OS_TOTAL_INTERRUPTS);
+    idtr_descriptor.limit = sizeof(struct idt_desc)*FASKA_OS_TOTAL_INTERRUPTS - 1;
     idtr_descriptor.base = (uint32_t)idt_descriptors;
 
-    for (uint16_t i; i < FASKAOS_TOTAL_INTERRUPTS; i++) {
+    for (uint16_t i; i < FASKA_OS_TOTAL_INTERRUPTS; i++) {
         idt_set(i, no_interrupt);
     }
 

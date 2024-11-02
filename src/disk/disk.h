@@ -3,7 +3,7 @@
 
 typedef unsigned int FASKAOS_DISK_TYPE;
 
-#define FASKAOS_DISK_TYPE_REAL 0x0
+#define FASKA_OS_DISK_TYPE_REAL 0x0
 
 typedef struct disk{
     FASKAOS_DISK_TYPE type;

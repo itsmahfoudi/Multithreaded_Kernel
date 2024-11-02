@@ -31,8 +31,8 @@ int disk_read_sector(int lba, int total, void* buffer) {
 
 void disk_search_and_init(void) {
     memset(&disk1, 0, sizeof(disk));
-    disk1.type = FASKAOS_DISK_TYPE_REAL;
-    disk1.sector_size = FASKAOS_SECTOR_SIZE;
+    disk1.type = FASKA_OS_DISK_TYPE_REAL;
+    disk1.sector_size = FASKA_OS_SECTOR_SIZE;
 }
 
 disk *disk_get(int index) {
