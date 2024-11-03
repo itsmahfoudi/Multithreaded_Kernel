@@ -1,7 +1,7 @@
 FILES = build/kernel.asm.o build/kernel.o ./build/memory/memory.o ./build/idt/idt.o \
 		./build/idt/idt.asm.o ./build/io/io.asm.o ./build/memory/heap/heap.o \
 		./build/memory/heap/kheap.o ./build/memory/paging/paging.o ./build/memory/paging/paging.asm.o \
-		build/disk/disk.o build/string/string.o build/fs/pparser.o
+		build/disk/disk.o build/string/string.o build/fs/pparser.o build/disk/streamer.o
 
 INCLUDES = -Isrc
 FLAGS = -g -ffreestanding -falign-jumps -falign-functions -falign-labels -falign-loops  \
@@ -59,6 +59,10 @@ build/fs/pparser.o : src/fs/pparser.c
 
 build/string/string.o : src/string/string.c
 	i686-elf-gcc $(INCLUDES) $(FLAGS) -I src/string -std=gnu99 -c src/string/string.c -o build/string/string.o
+
+build/disk/streamer.o : src/disk/streamer.c
+	i686-elf-gcc $(INCLUDES) $(FLAGS) -I src/disk/ -std=gnu99 -c src/disk/streamer.c -o build/disk/streamer.o
+
 
 clean:
 	rm -rf bin/

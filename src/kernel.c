@@ -8,7 +8,7 @@
 #include "disk/disk.h"
 #include "fs/pparser.h"
 #include "string/string.h"
-
+#include "disk/streamer.h"
 
 uint16_t* video_mem = 0;
 uint16_t terminal_row = 0;
@@ -90,19 +90,15 @@ void kernel_main(void) {
     //Enable the system interrupts
     enable_interrupts();
 
-    //test path parser
-    const char* path = "0:/bin/shell.elf";
-    path_root* root = pathparser_parse(path, "");
-    if (root == NULL) {
-        print("Failed to parse path\n");
-    } else {
-        print("Parsed path\n");
-        path_part* part = root->first;
-        while (part != NULL) {
-            print(part->part);
-            print("\n");
-            part = part->next;
-        }
-        pathparser_free(root);
+    // test the disk streamer
+    disk_stream *stream = disk_streamer_create(0);
+    if (stream == NULL) {
+        print("Failed to create disk stream\n");
+        while (1);
+        //problem();
     }
+    disk_streamer_seek(stream, 0x40b);
+    unsigned char buff;
+    disk_streamer_read(stream, &buff, 4);
+    while (1);
 }
